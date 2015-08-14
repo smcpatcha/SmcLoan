@@ -18,7 +18,7 @@ namespace SMCLoan
         public Loan()
             : this(0, 0, null, new DateTime())
         {
-        }
+        } 
 
         public Loan(decimal principal, decimal outstanding, Bank previousOwner, DateTime lastPayDate)
         {

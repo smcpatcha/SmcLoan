@@ -174,7 +174,7 @@ namespace SMCLoanFacts
                 loan.Payments.ShouldNotBeNull();
                 loan.Payments.Count().ShouldEqual(1);
                 loan.Payments.ShouldContain(p);
-            }
+            } 
         }
     }
 }

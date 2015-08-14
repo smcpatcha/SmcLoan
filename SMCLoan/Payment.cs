@@ -13,7 +13,7 @@ namespace SMCLoan
         public decimal InterestAmount { get; set; }
         public decimal PaidPrincipalAmount { get; set; }
         public decimal Outstanding { get; set; }
-
+        public decimal Principal { get; set; }
         public int Days { get; set; }
     }
 }

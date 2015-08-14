@@ -174,7 +174,25 @@ namespace SMCLoanFacts
                 loan.Payments.ShouldNotBeNull();
                 loan.Payments.Count().ShouldEqual(1);
                 loan.Payments.ShouldContain(p);
-            } 
+            }
+
+            [Fact]
+            public void PaymentShouldStorePrincipalAmoutBeforePaid()
+            {
+                Loan loan = new Loan(
+                       principal: 1000000,
+                       outstanding: 1000000,
+                       previousOwner: new Bank("TEST", 7.0),
+                       lastPayDate: new DateTime(2015, 7, 1));
+
+                Payment p1 = loan.Pay(new DateTime(2015, 8, 1), 10000m);
+
+                p1.Principal.ShouldEqual(1000000);
+
+                Payment p2 = loan.Pay(new DateTime(2015, 8, 20), 20000m);
+
+                p2.Principal.ShouldEqual(p1.Outstanding);
+            }
         }
     }
 }

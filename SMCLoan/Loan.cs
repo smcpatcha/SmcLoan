@@ -56,12 +56,12 @@ namespace SMCLoan
                 Accrued = interestAmount - amount;
             }
 
+            payment.Principal = this.Outstanding;
             payment.PaidPrincipalAmount = amount - payment.InterestAmount;
             payment.Outstanding = this.Outstanding - payment.PaidPrincipalAmount;
             this.LastPayDate = date;
-            this.Outstanding = payment.Outstanding;
-
-
+            this.Outstanding = payment.Outstanding;           
+            
             Payments.Add(payment);
 
             return payment;

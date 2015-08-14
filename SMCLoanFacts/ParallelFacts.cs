@@ -14,7 +14,7 @@ namespace SMCLoanFacts
         [Trait("category", "para1")]
         public void ThreeSecs()
         {
-            System.Threading.Thread.Sleep(3000);
+            //System.Threading.Thread.Sleep(3000);
         }        
     }
 
@@ -25,7 +25,7 @@ namespace SMCLoanFacts
         [Trait("category", "para1")]
         public void FiveSecs()
         {
-            System.Threading.Thread.Sleep(5000);
+            //System.Threading.Thread.Sleep(5000);
         }
     }
 }

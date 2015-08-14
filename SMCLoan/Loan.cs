@@ -13,10 +13,11 @@ namespace SMCLoan
         public DateTime LastPayDate { get; set; }
         public Bank PreviousOwner { get; set; }
         public decimal Accrued { get; set; }
-        
-        public Loan()
-        {
+        public List<Payment> Payments { get; set; }
 
+        public Loan()
+            : this(0, 0, null, new DateTime())
+        {
         }
 
         public Loan(decimal principal, decimal outstanding, Bank previousOwner, DateTime lastPayDate)
@@ -25,13 +26,14 @@ namespace SMCLoan
             this.Outstanding = outstanding;
             this.PreviousOwner = previousOwner;
             this.LastPayDate = lastPayDate;
+            Payments = new List<Payment>();
         }
 
         public Payment Pay(DateTime date, decimal amount)
         {
             if (date < LastPayDate)
             {
-                string s = String.Format("paid data can not before the last pay date, last pay date is {0}.",  LastPayDate.ToString("yyyy-MM-dd"));
+                string s = String.Format("paid data can not before the last pay date, last pay date is {0}.", LastPayDate.ToString("yyyy-MM-dd"));
                 throw new ArgumentException(s, "date");
             }
             Payment payment = new Payment();
@@ -45,7 +47,7 @@ namespace SMCLoan
 
             if (amount >= interestAmount)
             {
-                payment.InterestAmount = interestAmount;                
+                payment.InterestAmount = interestAmount;
                 Accrued = 0;
             }
             else
@@ -58,6 +60,9 @@ namespace SMCLoan
             payment.Outstanding = this.Outstanding - payment.PaidPrincipalAmount;
             this.LastPayDate = date;
             this.Outstanding = payment.Outstanding;
+
+
+            Payments.Add(payment);
 
             return payment;
         }

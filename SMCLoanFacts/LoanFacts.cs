@@ -160,6 +160,21 @@ namespace SMCLoanFacts
 
                 Assert.Contains("last pay date is 2015-07-01", ex.Message);
             }
+
+            [Fact]
+            public void LoanShouldStorePaymentAfterPaid()
+            {
+                Loan loan = new Loan(
+                       principal: 1000000,
+                       outstanding: 1000000,
+                       previousOwner: new Bank("TEST", 7.0),
+                       lastPayDate: new DateTime(2015, 7, 1));
+                Payment p = loan.Pay(new DateTime(2015, 8, 1), 10000m);
+
+                loan.Payments.ShouldNotBeNull();
+                loan.Payments.Count().ShouldEqual(1);
+                loan.Payments.ShouldContain(p);
+            }
         }
     }
 }
